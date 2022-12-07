@@ -5,28 +5,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
   <title>Blog Post | @yield('title')</title>
   <!-- Simple bar CSS -->
   <link rel="stylesheet" href="{{  asset('admin/css/simplebar.css')  }}">
   <!-- Fonts CSS -->
+  <link rel="stylesheet" href="{{ asset('admin/assets/vendors/sweetalert2/sweetalert2.min.css') }}">
   <link
     href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
   <!-- Icons CSS -->
-  <link rel="stylesheet" href="{{ asset(' admin/css/feather.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/select2.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/dropzone.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/uppy.min.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/jquery.steps.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/jquery.timepicker.css ') }}">
-  <link rel="stylesheet" href="{{ asset(' admin/css/quill.snow.css ') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ asset('admin/css/feather.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/select2.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/dropzone.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/uppy.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/dataTables.bootstrap4.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/jquery.steps.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/jquery.timepicker.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/quill.snow.css') }}">
   <!-- Date Range Picker CSS -->
-  <link rel="stylesheet" href="{{ asset(' admin/css/daterangepicker.css ') }}">
+  <link rel="stylesheet" href="{{ asset('admin/css/daterangepicker.css') }}">
   <!-- App CSS -->
-  <link rel="stylesheet" href="{{ asset(' admin/css/app-light.css ') }}" id="lightTheme">
-  <link rel="stylesheet" href="{{ asset(' admin/css/app-dark.css ') }}" id="darkTheme" disabled>
+  <link rel="stylesheet" href="{{ asset('admin/css/app-light.css') }}" id="lightTheme">
+  <link rel="stylesheet" href="{{ asset('admin/css/app-dark.css') }}" id="darkTheme" disabled>
 </head>
 
 <body class="vertical  light  ">
@@ -37,11 +41,11 @@
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-12">
-            <div class="row align-items-center mb-2">
+            {{-- <div class="row align-items-center mb-2">
               <div class="col">
                 <h2 class="h5 page-title">@yield('content2')</h2>
               </div>
-            </div>
+            </div> --}}
             @yield('content')
           </div> <!-- .col-12 -->
         </div> <!-- .row -->
@@ -57,11 +61,14 @@
   <script src='{{ asset('admin/js/jquery.stickOnScroll.js') }}'></script>
   <script src="{{ asset('admin/js/tinycolor-min.js') }}"></script>
   <script src="{{ asset('admin/js/config.js') }}"></script>
+  <script src='{{ asset('admin/js/jquery.dataTables.min.js') }}'></script>
+  <script src='{{ asset('admin/js/dataTables.bootstrap4.min.js') }}'></script>
   <script src="{{ asset('admin/js/d3.min.js') }}"></script>
   <script src="{{ asset('admin/js/topojson.min.js') }}"></script>
   <script src="{{ asset('admin/js/datamaps.all.min.js') }}"></script>
   <script src="{{ asset('admin/js/datamaps-zoomto.js') }}"></script>
   <script src="{{ asset('admin/js/datamaps.custom.js') }}"></script>
+  <script src="{{ asset('admin/assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
   <script src="{{ asset('admin/js/Chart.min.js') }}"></script>
   <script>
     /* defind global options */
@@ -283,6 +290,16 @@
         });
       }
   </script>
+  <script>
+       $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+  </script>
+  @stack('custom_js')
   <script src="{{ asset('admin/js/apps.js') }}"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
