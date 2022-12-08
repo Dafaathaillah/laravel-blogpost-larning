@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriPostController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,11 @@ Route::prefix('kategori')->group(function(){
     Route::post('/', [KategoriPostController::class, 'save'])->name('kategori.save');
     Route::get('/{kategori:id_kategori}', [KategoriPostController::class, 'show'])->name('kategori.show');
     Route::post('/{kategori:id_kategori}', [KategoriPostController::class, 'destroy'])->name('kategori.delete');
+});
+
+Route::prefix('post')->group(function(){
+    Route::get('/', [PostController::class, 'index'])->name('post.index');
+    Route::post('/', [PostController::class, 'save'])->name('post.save');
+    Route::get('/{post:id_post}', [PostController::class, 'show'])->name('post.show');
+    Route::post('/{post:id_post}', [PostController::class, 'destroy'])->name('post.delete');
 });

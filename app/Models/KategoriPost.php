@@ -25,7 +25,7 @@ class KategoriPost extends Model
             $model->id_kategori = Uuid::uuid4()->toString();
         });
     }
-    public function produk()
+    public function post()
     {
         return $this->hasMany(Post::class, 'kategori_id', 'id_kategori');
     }

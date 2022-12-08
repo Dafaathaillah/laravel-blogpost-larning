@@ -24,7 +24,7 @@
          </a>
        </li>
        <li class="nav-item {{ (request()->segment(1) == 'post') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+        <a href="{{ route('post.index') }}" class="nav-link">
           <i class="fe fe-layers fe-16"></i>
           <span class="ml-3 item-text">Post</span><span class="sr-only">(current)</span>
         </a>

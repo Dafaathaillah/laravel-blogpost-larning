@@ -17,7 +17,7 @@ Kategori Page
             <div class="card shadow">
                 <div class="card-body">
                     <!-- table -->
-                    <table class="table datatables" id="tableKategori">
+                    <table class="table datatables" id="table-data">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -31,7 +31,7 @@ Kategori Page
         </div> <!-- simple table -->
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="modalAddKategori" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="modal-data" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -41,7 +41,7 @@ Kategori Page
                             <strong class="card-title" id="title-modal"></strong>
                         </div>
                         <div class="container">
-                            <form id="formKategori" class="needs-validation" novalidate>
+                            <form id="form-data" class="needs-validation" novalidate>
                                 <input type="hidden" id="id_kategori">
                                 <div class="mb-3">
                                     <label>Nama Kategori</label>
@@ -50,9 +50,12 @@ Kategori Page
                                     <div class="valid-feedback"> Looks good! </div>
                                 </div> <!-- /.form-row -->
                             </form> <!-- /.card-body -->
-                            <button class="btn btn-primary" id="btnSaveKategori">Send</button>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="btnSave">Send</button>
+                    <button class="btn btn-warning" id="btnCancel">Cancel</button>
                 </div>
             </div>
         </div>
@@ -69,7 +72,7 @@ Kategori Page
         });
     </script>
     <script>
-        var table = $('#tableKategori').DataTable({
+        var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('kategori.index') }}",
@@ -93,12 +96,17 @@ Kategori Page
         $(document).ready(function() {
             $('body').on('click', '#btnAdd', function() {
                $('#title-modal').html('Form Tambah Kategori');
-                document.getElementById("formKategori").reset();
-                $('#btnSaveKategori').html('Simpan')
-                $('#modalAddKategori').modal('show');
+                document.getElementById("form-data").reset();
+                $('#btnSave').html('Simpan')
+                $('#modal-data').modal('show');
             });
         });
 
+        $(document).ready(function() {
+            $('body').on('click', '#btnCancel', function() {
+                $('#modal-data').modal('hide');
+            });
+        });
 
         $(document).ready(function() {
             $('body').on('click', '#btnEdit', function() {
@@ -115,15 +123,15 @@ Kategori Page
                     document.getElementById("nama_kategori").value = response.nama_kategori;
 
 
-                    $('#btnSaveKategori').html('Simpan')
-                    $('#modalAddKategori').modal('show');
+                    $('#btnSave').html('Simpan')
+                    $('#modal-data').modal('show');
                 })
 
             });
         });
 
         $(document).ready(function() {
-            $('body').on('click', '#btnSaveKategori', function() {
+            $('body').on('click', '#btnSave', function() {
                 var data = {
                     id: $('#id_kategori').val(),
                     nama_kategori: $('#nama_kategori').val(),
@@ -143,8 +151,8 @@ Kategori Page
                         })
                         console.log(data);
                         table.draw();
-                        $('#btnSaveKategori').html('Simpan');
-                        $('#modalAddKategori').modal('hide');
+                        $('#btnSave').html('Simpan');
+                        $('#modal-data').modal('hide');
                         swalWithBootstrapButtons.fire(
                             'Simpan!',
                             'Data Berhasil Disimpan.',
