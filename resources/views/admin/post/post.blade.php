@@ -214,7 +214,7 @@ Kategori Page
 
             });
         });
-
+ 
         $(document).ready(function() {
             $('body').on('click', '#btnDelete', function() {
                 var dataId = $(this).attr("data-id");
